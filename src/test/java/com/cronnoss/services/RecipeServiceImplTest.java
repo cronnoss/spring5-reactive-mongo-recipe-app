@@ -5,6 +5,7 @@ import com.cronnoss.converters.RecipeCommandToRecipe;
 import com.cronnoss.converters.RecipeToRecipeCommand;
 import com.cronnoss.domain.Recipe;
 import com.cronnoss.repositories.reactive.RecipeReactiveRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -15,8 +16,6 @@ import reactor.core.publisher.Mono;
 import java.util.HashSet;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
 
 public class RecipeServiceImplTest {
@@ -48,7 +47,7 @@ public class RecipeServiceImplTest {
 
         Recipe recipeReturned = recipeService.findById("1").block();
 
-        assertNotNull("Null recipe returned", recipeReturned);
+        Assertions.assertNotNull(recipeReturned, "Null recipe returned");
         verify(recipeReactiveRepository, times(1)).findById(anyString());
         verify(recipeReactiveRepository, never()).findAll();
     }
@@ -68,7 +67,7 @@ public class RecipeServiceImplTest {
 
         RecipeCommand commandById = recipeService.findCommandById("1").block();
 
-        assertNotNull("Null recipe returned", commandById);
+        Assertions.assertNotNull(commandById, "Null recipe returned");
         verify(recipeReactiveRepository, times(1)).findById(anyString());
         verify(recipeReactiveRepository, never()).findAll();
     }
@@ -84,7 +83,7 @@ public class RecipeServiceImplTest {
 
         List<Recipe> recipes = recipeService.getRecipes().collectList().block();
 
-        assertEquals(recipes.size(), 1);
+        Assertions.assertEquals(recipes.size(), 1);
         verify(recipeReactiveRepository, times(1)).findAll();
         verify(recipeReactiveRepository, never()).findById(anyString());
     }

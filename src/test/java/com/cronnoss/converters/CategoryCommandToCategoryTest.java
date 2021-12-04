@@ -2,12 +2,9 @@ package com.cronnoss.converters;
 
 import com.cronnoss.commands.CategoryCommand;
 import com.cronnoss.domain.Category;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CategoryCommandToCategoryTest {
 
@@ -22,12 +19,12 @@ public class CategoryCommandToCategoryTest {
 
     @Test
     public void testNullObject() throws Exception {
-        assertNull(conveter.convert(null));
+        Assertions.assertNull(conveter.convert(null));
     }
 
     @Test
     public void testEmptyObject() throws Exception {
-        assertNotNull(conveter.convert(new CategoryCommand()));
+        Assertions.assertNotNull(conveter.convert(new CategoryCommand()));
     }
 
     @Test
@@ -41,8 +38,8 @@ public class CategoryCommandToCategoryTest {
         Category category = conveter.convert(categoryCommand);
 
         //then
-        assertEquals(ID_VALUE, category.getId());
-        assertEquals(DESCRIPTION, category.getDescription());
+        Assertions.assertEquals(ID_VALUE, category.getId());
+        Assertions.assertEquals(DESCRIPTION, category.getDescription());
     }
 
 }

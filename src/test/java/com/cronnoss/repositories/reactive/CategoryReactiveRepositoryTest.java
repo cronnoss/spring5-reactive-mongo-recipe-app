@@ -1,15 +1,13 @@
 package com.cronnoss.repositories.reactive;
 
 import com.cronnoss.domain.Category;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
 @DataMongoTest
@@ -32,7 +30,7 @@ public class CategoryReactiveRepositoryTest {
 
         Long count = categoryReactiveRepository.count().block();
 
-        assertEquals(Long.valueOf(1L), count);
+        Assertions.assertEquals(Long.valueOf(1L), count);
     }
 
     @Test
@@ -44,6 +42,6 @@ public class CategoryReactiveRepositoryTest {
 
         Category fetchedCat = categoryReactiveRepository.findByDescription("Foo").block();
 
-        assertNotNull(fetchedCat.getId());
+        Assertions.assertNotNull(fetchedCat.getId());
     }
 }

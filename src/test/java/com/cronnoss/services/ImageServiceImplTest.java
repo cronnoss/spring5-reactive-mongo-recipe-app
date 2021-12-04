@@ -2,6 +2,7 @@ package com.cronnoss.services;
 
 import com.cronnoss.domain.Recipe;
 import com.cronnoss.repositories.reactive.RecipeReactiveRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -11,7 +12,6 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Mono;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class ImageServiceImplTest {
@@ -49,7 +49,7 @@ public class ImageServiceImplTest {
         //then
         verify(recipeReactiveRepository, times(1)).save(argumentCaptor.capture());
         Recipe savedRecipe = argumentCaptor.getValue();
-        assertEquals(multipartFile.getBytes().length, savedRecipe.getImage().length);
+        Assertions.assertEquals(multipartFile.getBytes().length, savedRecipe.getImage().length);
     }
 
 }

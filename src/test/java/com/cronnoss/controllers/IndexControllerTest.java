@@ -2,6 +2,7 @@ package com.cronnoss.controllers;
 
 import com.cronnoss.domain.Recipe;
 import com.cronnoss.services.RecipeService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -73,11 +73,11 @@ public class IndexControllerTest {
 
 
         //then
-        assertEquals("index", viewName);
+        Assertions.assertEquals("index", viewName);
         verify(recipeService, times(1)).getRecipes();
         verify(model, times(1)).addAttribute(eq("recipes"), argumentCaptor.capture());
         List<Recipe> setInController = argumentCaptor.getValue();
-        assertEquals(2, setInController.size());
+        Assertions.assertEquals(2, setInController.size());
     }
 
 }

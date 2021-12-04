@@ -102,7 +102,7 @@ public class ImageControllerTest {
 //
 //        byte[] reponseBytes = response.getContentAsByteArray();
 //
-//        assertEquals(s.getBytes().length, reponseBytes.length);
+//       Assertions.assertEquals(s.getBytes().length, reponseBytes.length);
     }
 
 }

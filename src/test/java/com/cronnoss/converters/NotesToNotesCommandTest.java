@@ -2,12 +2,9 @@ package com.cronnoss.converters;
 
 import com.cronnoss.commands.NotesCommand;
 import com.cronnoss.domain.Notes;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class NotesToNotesCommandTest {
 
@@ -31,17 +28,17 @@ public class NotesToNotesCommandTest {
         NotesCommand notesCommand = converter.convert(notes);
 
         //then
-        assertEquals(ID_VALUE, notesCommand.getId());
-        assertEquals(RECIPE_NOTES, notesCommand.getRecipeNotes());
+        Assertions.assertEquals(ID_VALUE, notesCommand.getId());
+        Assertions.assertEquals(RECIPE_NOTES, notesCommand.getRecipeNotes());
     }
 
     @Test
     public void testNull() throws Exception {
-        assertNull(converter.convert(null));
+        Assertions.assertNull(converter.convert(null));
     }
 
     @Test
     public void testEmptyObject() throws Exception {
-        assertNotNull(converter.convert(new Notes()));
+        Assertions.assertNotNull(converter.convert(new Notes()));
     }
 }

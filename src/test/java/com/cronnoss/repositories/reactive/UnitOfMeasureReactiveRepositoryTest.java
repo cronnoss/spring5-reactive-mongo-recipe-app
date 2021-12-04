@@ -1,14 +1,13 @@
 package com.cronnoss.repositories.reactive;
 
 import com.cronnoss.domain.UnitOfMeasure;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import static org.junit.Assert.assertEquals;
 
 @ExtendWith(SpringExtension.class)
 @DataMongoTest
@@ -33,7 +32,7 @@ public class UnitOfMeasureReactiveRepositoryTest {
 
         Long count = unitOfMeasureReactiveRepository.count().block();
 
-        assertEquals(Long.valueOf(1L), count);
+        Assertions.assertEquals(Long.valueOf(1L), count);
 
     }
 
@@ -46,7 +45,7 @@ public class UnitOfMeasureReactiveRepositoryTest {
 
         UnitOfMeasure fetchedUOM = unitOfMeasureReactiveRepository.findByDescription(EACH).block();
 
-        assertEquals(EACH, fetchedUOM.getDescription());
+        Assertions.assertEquals(EACH, fetchedUOM.getDescription());
 
     }
 }

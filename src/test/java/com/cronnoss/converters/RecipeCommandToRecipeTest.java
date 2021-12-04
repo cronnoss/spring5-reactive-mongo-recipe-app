@@ -6,12 +6,9 @@ import com.cronnoss.commands.NotesCommand;
 import com.cronnoss.commands.RecipeCommand;
 import com.cronnoss.domain.Difficulty;
 import com.cronnoss.domain.Recipe;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RecipeCommandToRecipeTest {
     public static final String RECIPE_ID = "1";
@@ -41,12 +38,12 @@ public class RecipeCommandToRecipeTest {
 
     @Test
     public void testNullObject() throws Exception {
-        assertNull(converter.convert(null));
+        Assertions.assertNull(converter.convert(null));
     }
 
     @Test
     public void testEmptyObject() throws Exception {
-        assertNotNull(converter.convert(new RecipeCommand()));
+        Assertions.assertNotNull(converter.convert(new RecipeCommand()));
     }
 
     @Test
@@ -89,19 +86,19 @@ public class RecipeCommandToRecipeTest {
         //when
         Recipe recipe = converter.convert(recipeCommand);
 
-        assertNotNull(recipe);
-        assertEquals(RECIPE_ID, recipe.getId());
-        assertEquals(COOK_TIME, recipe.getCookTime());
-        assertEquals(PREP_TIME, recipe.getPrepTime());
-        assertEquals(DESCRIPTION, recipe.getDescription());
-        assertEquals(DIFFICULTY, recipe.getDifficulty());
-        assertEquals(DIRECTIONS, recipe.getDirections());
-        assertEquals(SERVINGS, recipe.getServings());
-        assertEquals(SOURCE, recipe.getSource());
-        assertEquals(URL, recipe.getUrl());
-        assertEquals(NOTES_ID, recipe.getNotes().getId());
-        assertEquals(2, recipe.getCategories().size());
-        assertEquals(2, recipe.getIngredients().size());
+        Assertions.assertNotNull(recipe);
+        Assertions.assertEquals(RECIPE_ID, recipe.getId());
+        Assertions.assertEquals(COOK_TIME, recipe.getCookTime());
+        Assertions.assertEquals(PREP_TIME, recipe.getPrepTime());
+        Assertions.assertEquals(DESCRIPTION, recipe.getDescription());
+        Assertions.assertEquals(DIFFICULTY, recipe.getDifficulty());
+        Assertions.assertEquals(DIRECTIONS, recipe.getDirections());
+        Assertions.assertEquals(SERVINGS, recipe.getServings());
+        Assertions.assertEquals(SOURCE, recipe.getSource());
+        Assertions.assertEquals(URL, recipe.getUrl());
+        Assertions.assertEquals(NOTES_ID, recipe.getNotes().getId());
+        Assertions.assertEquals(2, recipe.getCategories().size());
+        Assertions.assertEquals(2, recipe.getIngredients().size());
     }
 
 }

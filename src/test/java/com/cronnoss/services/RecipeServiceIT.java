@@ -5,13 +5,12 @@ import com.cronnoss.converters.RecipeCommandToRecipe;
 import com.cronnoss.converters.RecipeToRecipeCommand;
 import com.cronnoss.domain.Recipe;
 import com.cronnoss.repositories.RecipeRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //@DataMongoTest
 @ExtendWith(SpringExtension.class)
@@ -44,9 +43,9 @@ public class RecipeServiceIT {
         RecipeCommand savedRecipeCommand = recipeService.saveRecipeCommand(testRecipeCommand).block();
 
         //then
-        assertEquals(NEW_DESCRIPTION, savedRecipeCommand.getDescription());
-        assertEquals(testRecipe.getId(), savedRecipeCommand.getId());
-        assertEquals(testRecipe.getCategories().size(), savedRecipeCommand.getCategories().size());
-        assertEquals(testRecipe.getIngredients().size(), savedRecipeCommand.getIngredients().size());
+        Assertions.assertEquals(NEW_DESCRIPTION, savedRecipeCommand.getDescription());
+        Assertions.assertEquals(testRecipe.getId(), savedRecipeCommand.getId());
+        Assertions.assertEquals(testRecipe.getCategories().size(), savedRecipeCommand.getCategories().size());
+        Assertions.assertEquals(testRecipe.getIngredients().size(), savedRecipeCommand.getIngredients().size());
     }
 }

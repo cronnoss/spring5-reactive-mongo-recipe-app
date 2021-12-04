@@ -4,14 +4,11 @@ import com.cronnoss.commands.IngredientCommand;
 import com.cronnoss.commands.UnitOfMeasureCommand;
 import com.cronnoss.domain.Ingredient;
 import com.cronnoss.domain.Recipe;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class IngredientCommandToIngredientTest {
 
@@ -30,12 +27,12 @@ public class IngredientCommandToIngredientTest {
 
     @Test
     public void testNullObject() throws Exception {
-        assertNull(converter.convert(null));
+        Assertions.assertNull(converter.convert(null));
     }
 
     @Test
     public void testEmptyObject() throws Exception {
-        assertNotNull(converter.convert(new IngredientCommand()));
+        Assertions.assertNotNull(converter.convert(new IngredientCommand()));
     }
 
     @Test
@@ -53,12 +50,12 @@ public class IngredientCommandToIngredientTest {
         Ingredient ingredient = converter.convert(command);
 
         //then
-        assertNotNull(ingredient);
-        assertNotNull(ingredient.getUom());
-        assertEquals(ID_VALUE, ingredient.getId());
-        assertEquals(AMOUNT, ingredient.getAmount());
-        assertEquals(DESCRIPTION, ingredient.getDescription());
-        assertEquals(UOM_ID, ingredient.getUom().getId());
+        Assertions.assertNotNull(ingredient);
+        Assertions.assertNotNull(ingredient.getUom());
+        Assertions.assertEquals(ID_VALUE, ingredient.getId());
+        Assertions.assertEquals(AMOUNT, ingredient.getAmount());
+        Assertions.assertEquals(DESCRIPTION, ingredient.getDescription());
+        Assertions.assertEquals(UOM_ID, ingredient.getUom().getId());
     }
 
     @Test
@@ -75,11 +72,11 @@ public class IngredientCommandToIngredientTest {
         Ingredient ingredient = converter.convert(command);
 
         //then
-        assertNotNull(ingredient);
-        assertNull(ingredient.getUom());
-        assertEquals(ID_VALUE, ingredient.getId());
-        assertEquals(AMOUNT, ingredient.getAmount());
-        assertEquals(DESCRIPTION, ingredient.getDescription());
+        Assertions.assertNotNull(ingredient);
+        Assertions.assertNull(ingredient.getUom());
+        Assertions.assertEquals(ID_VALUE, ingredient.getId());
+        Assertions.assertEquals(AMOUNT, ingredient.getAmount());
+        Assertions.assertEquals(DESCRIPTION, ingredient.getDescription());
     }
 
 }

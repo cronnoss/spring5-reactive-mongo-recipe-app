@@ -4,6 +4,7 @@ import com.cronnoss.commands.UnitOfMeasureCommand;
 import com.cronnoss.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import com.cronnoss.domain.UnitOfMeasure;
 import com.cronnoss.repositories.reactive.UnitOfMeasureReactiveRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -14,7 +15,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class UnitOfMeasureServiceImplTest {
@@ -50,7 +50,7 @@ public class UnitOfMeasureServiceImplTest {
         List<UnitOfMeasureCommand> commands = service.listAllUoms().collectList().block();
 
         //then
-        assertEquals(2, commands.size());
+        Assertions.assertEquals(2, commands.size());
         verify(unitOfMeasureReactiveRepository, times(1)).findAll();
     }
 

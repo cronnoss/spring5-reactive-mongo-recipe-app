@@ -2,6 +2,7 @@ package com.cronnoss.repositories;
 
 import com.cronnoss.bootstrap.RecipeBootstrap;
 import com.cronnoss.domain.UnitOfMeasure;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -11,8 +12,6 @@ import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
 @DataMongoTest
@@ -45,7 +44,7 @@ public class UnitOfMeasureRepositoryIT {
 
         Optional<UnitOfMeasure> uomOptional = unitOfMeasureRepository.findByDescription("Teaspoon");
 
-        assertEquals("Teaspoon", uomOptional.get().getDescription());
+        Assertions.assertEquals("Teaspoon", uomOptional.get().getDescription());
     }
 
     @Disabled
@@ -54,7 +53,7 @@ public class UnitOfMeasureRepositoryIT {
 
         Optional<UnitOfMeasure> uomOptional = unitOfMeasureRepository.findByDescription("Cup");
 
-        assertEquals("Cup", uomOptional.get().getDescription());
+        Assertions.assertEquals("Cup", uomOptional.get().getDescription());
     }
 
 }

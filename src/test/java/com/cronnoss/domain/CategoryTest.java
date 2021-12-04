@@ -1,9 +1,8 @@
 package com.cronnoss.domain;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class CategoryTest {
 
@@ -20,7 +19,7 @@ public class CategoryTest {
 
         category.setId(idValue);
 
-        assertEquals(idValue, category.getId());
+        Assertions.assertEquals(idValue, category.getId());
     }
 
     @Test

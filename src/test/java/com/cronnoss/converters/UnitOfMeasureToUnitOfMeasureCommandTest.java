@@ -2,12 +2,12 @@ package com.cronnoss.converters;
 
 import com.cronnoss.commands.UnitOfMeasureCommand;
 import com.cronnoss.domain.UnitOfMeasure;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UnitOfMeasureToUnitOfMeasureCommandTest {
 
@@ -41,8 +41,8 @@ public class UnitOfMeasureToUnitOfMeasureCommandTest {
         UnitOfMeasureCommand uomc = converter.convert(uom);
 
         //then
-        assertEquals(LONG_VALUE, uomc.getId());
-        assertEquals(DESCRIPTION, uomc.getDescription());
+        Assertions.assertEquals(LONG_VALUE, uomc.getId());
+        Assertions.assertEquals(DESCRIPTION, uomc.getDescription());
     }
 
 }

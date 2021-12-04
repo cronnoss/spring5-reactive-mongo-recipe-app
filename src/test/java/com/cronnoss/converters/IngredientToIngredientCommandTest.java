@@ -4,14 +4,11 @@ import com.cronnoss.commands.IngredientCommand;
 import com.cronnoss.domain.Ingredient;
 import com.cronnoss.domain.Recipe;
 import com.cronnoss.domain.UnitOfMeasure;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class IngredientToIngredientCommandTest {
 
@@ -31,12 +28,12 @@ public class IngredientToIngredientCommandTest {
 
     @Test
     public void testNullConvert() throws Exception {
-        assertNull(converter.convert(null));
+        Assertions.assertNull(converter.convert(null));
     }
 
     @Test
     public void testEmptyObject() throws Exception {
-        assertNotNull(converter.convert(new Ingredient()));
+        Assertions.assertNotNull(converter.convert(new Ingredient()));
     }
 
     @Test
@@ -50,10 +47,10 @@ public class IngredientToIngredientCommandTest {
         //when
         IngredientCommand ingredientCommand = converter.convert(ingredient);
         //then
-        assertNull(ingredientCommand.getUom());
-        assertEquals(ID_VALUE, ingredientCommand.getId());
-        assertEquals(AMOUNT, ingredientCommand.getAmount());
-        assertEquals(DESCRIPTION, ingredientCommand.getDescription());
+        Assertions.assertNull(ingredientCommand.getUom());
+        Assertions.assertEquals(ID_VALUE, ingredientCommand.getId());
+        Assertions.assertEquals(AMOUNT, ingredientCommand.getAmount());
+        Assertions.assertEquals(DESCRIPTION, ingredientCommand.getDescription());
     }
 
     @Test
@@ -71,11 +68,11 @@ public class IngredientToIngredientCommandTest {
         //when
         IngredientCommand ingredientCommand = converter.convert(ingredient);
         //then
-        assertEquals(ID_VALUE, ingredientCommand.getId());
-        assertNotNull(ingredientCommand.getUom());
-        assertEquals(UOM_ID, ingredientCommand.getUom().getId());
-        // assertEquals(RECIPE, ingredientCommand.get);
-        assertEquals(AMOUNT, ingredientCommand.getAmount());
-        assertEquals(DESCRIPTION, ingredientCommand.getDescription());
+        Assertions.assertEquals(ID_VALUE, ingredientCommand.getId());
+        Assertions.assertNotNull(ingredientCommand.getUom());
+        Assertions.assertEquals(UOM_ID, ingredientCommand.getUom().getId());
+        //Assertions.assertEquals(RECIPE, ingredientCommand.get);
+        Assertions.assertEquals(AMOUNT, ingredientCommand.getAmount());
+        Assertions.assertEquals(DESCRIPTION, ingredientCommand.getDescription());
     }
 }

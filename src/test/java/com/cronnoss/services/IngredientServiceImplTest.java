@@ -10,6 +10,7 @@ import com.cronnoss.domain.Ingredient;
 import com.cronnoss.domain.Recipe;
 import com.cronnoss.repositories.reactive.RecipeReactiveRepository;
 import com.cronnoss.repositories.reactive.UnitOfMeasureReactiveRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -18,7 +19,6 @@ import reactor.core.publisher.Mono;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
@@ -79,7 +79,7 @@ public class IngredientServiceImplTest {
         IngredientCommand ingredientCommand = ingredientService.findByRecipeIdAndIngredientId("1", "3").block();
 
         //when
-        assertEquals("3", ingredientCommand.getId());
+        Assertions.assertEquals("3", ingredientCommand.getId());
         verify(recipeReactiveRepository, times(1)).findById(anyString());
     }
 
@@ -104,7 +104,7 @@ public class IngredientServiceImplTest {
         IngredientCommand savedCommand = ingredientService.saveIngredientCommand(command).block();
 
         //then
-        assertEquals("3", savedCommand.getId());
+        Assertions.assertEquals("3", savedCommand.getId());
         verify(recipeReactiveRepository, times(1)).findById(anyString());
         verify(recipeReactiveRepository, times(1)).save(any(Recipe.class));
 
