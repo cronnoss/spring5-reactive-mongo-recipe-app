@@ -3,20 +3,21 @@ package com.cronnoss.controllers;
 import com.cronnoss.commands.RecipeCommand;
 import com.cronnoss.services.ImageService;
 import com.cronnoss.services.RecipeService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import reactor.core.publisher.Mono;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
 
 public class ImageControllerTest {
 
@@ -46,7 +47,7 @@ public class ImageControllerTest {
         RecipeCommand command = new RecipeCommand();
         command.setId("1");
 
-        when(recipeService.findCommandById(anyString())).thenReturn(command);
+        when(recipeService.findCommandById(anyString())).thenReturn(Mono.just(command));
 
         //when
         mockMvc.perform(get("/recipe/1/image"))
@@ -72,36 +73,34 @@ public class ImageControllerTest {
         verify(imageService, times(1)).saveImageFile(anyString(), any());
     }
 
-
-    @Disabled
     @Test
     public void renderImageFromDB() throws Exception {
 
-//        //given
-//        RecipeCommand command = new RecipeCommand();
-//        command.setId("1");
-//
-//        String s = "fake image text";
-//        Byte[] bytesBoxed = new Byte[s.getBytes().length];
-//
-//        int i = 0;
-//
-//        for (byte primByte : s.getBytes()){
-//            bytesBoxed[i++] = primByte;
-//        }
-//
-//        command.setImage(bytesBoxed);
-//
-//        when(recipeService.findCommandById(anyString())).thenReturn(Mono.just(command));
-//
-//        //when
-//        MockHttpServletResponse response = mockMvc.perform(get("/recipe/1/recipeimage"))
-//                .andExpect(status().isOk())
-//                .andReturn().getResponse();
-//
-//        byte[] reponseBytes = response.getContentAsByteArray();
-//
-//       Assertions.assertEquals(s.getBytes().length, reponseBytes.length);
+        //given
+        RecipeCommand command = new RecipeCommand();
+        command.setId("1");
+
+        String s = "fake image text";
+        Byte[] bytesBoxed = new Byte[s.getBytes().length];
+
+        int i = 0;
+
+        for (byte primByte : s.getBytes()) {
+            bytesBoxed[i++] = primByte;
+        }
+
+        command.setImage(bytesBoxed);
+
+        when(recipeService.findCommandById(anyString())).thenReturn(Mono.just(command));
+
+        //when
+        MockHttpServletResponse response = mockMvc.perform(get("/recipe/1/recipeimage"))
+                .andExpect(status().isOk())
+                .andReturn().getResponse();
+
+        byte[] reponseBytes = response.getContentAsByteArray();
+
+        Assertions.assertEquals(s.getBytes().length, reponseBytes.length);
     }
 
 }
