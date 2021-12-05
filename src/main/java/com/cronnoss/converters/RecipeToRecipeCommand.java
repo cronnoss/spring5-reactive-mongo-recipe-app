@@ -9,14 +9,14 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand>{
+public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
 
-    private final com.cronnoss.converters.CategoryToCategoryCommand categoryConveter;
-    private final com.cronnoss.converters.IngredientToIngredientCommand ingredientConverter;
-    private final com.cronnoss.converters.NotesToNotesCommand notesConverter;
+    private final CategoryToCategoryCommand categoryConveter;
+    private final IngredientToIngredientCommand ingredientConverter;
+    private final NotesToNotesCommand notesConverter;
 
-    public RecipeToRecipeCommand(com.cronnoss.converters.CategoryToCategoryCommand categoryConveter, com.cronnoss.converters.IngredientToIngredientCommand ingredientConverter,
-                                 com.cronnoss.converters.NotesToNotesCommand notesConverter) {
+    public RecipeToRecipeCommand(CategoryToCategoryCommand categoryConveter, IngredientToIngredientCommand ingredientConverter,
+                                 NotesToNotesCommand notesConverter) {
         this.categoryConveter = categoryConveter;
         this.ingredientConverter = ingredientConverter;
         this.notesConverter = notesConverter;

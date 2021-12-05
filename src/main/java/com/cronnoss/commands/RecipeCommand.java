@@ -42,9 +42,9 @@ public class RecipeCommand {
     @NotBlank
     private String directions;
 
-    private List<com.cronnoss.commands.IngredientCommand> ingredients = new ArrayList<>();
+    private List<IngredientCommand> ingredients = new ArrayList<>();
     private Byte[] image;
     private Difficulty difficulty;
-    private com.cronnoss.commands.NotesCommand notes;
+    private NotesCommand notes;
     private List<CategoryCommand> categories = new ArrayList<>();
 }

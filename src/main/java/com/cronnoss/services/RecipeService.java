@@ -2,18 +2,19 @@ package com.cronnoss.services;
 
 import com.cronnoss.commands.RecipeCommand;
 import com.cronnoss.domain.Recipe;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+
+import java.util.Set;
 
 public interface RecipeService {
 
-    Flux<Recipe> getRecipes();
+    Set<Recipe> getRecipes();
 
-    Mono<Recipe> findById(String id);
+    Recipe findById(String id);
 
-    Mono<RecipeCommand> findCommandById(String id);
+    RecipeCommand findCommandById(String id);
 
-    Mono<RecipeCommand>  saveRecipeCommand(RecipeCommand command);
+    RecipeCommand saveRecipeCommand(RecipeCommand command);
 
-    Mono<Void> deleteById(String idToDelete);
+    void deleteById(String idToDelete);
 }
+

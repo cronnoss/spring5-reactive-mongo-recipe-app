@@ -4,11 +4,7 @@ import com.cronnoss.domain.*;
 import com.cronnoss.repositories.CategoryRepository;
 import com.cronnoss.repositories.RecipeRepository;
 import com.cronnoss.repositories.UnitOfMeasureRepository;
-import com.cronnoss.repositories.reactive.CategoryReactiveRepository;
-import com.cronnoss.repositories.reactive.RecipeReactiveRepository;
-import com.cronnoss.repositories.reactive.UnitOfMeasureReactiveRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -27,15 +23,6 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     private final RecipeRepository recipeRepository;
     private final UnitOfMeasureRepository unitOfMeasureRepository;
 
-    @Autowired
-    UnitOfMeasureReactiveRepository unitOfMeasureReactiveRepository;
-
-    @Autowired
-    CategoryReactiveRepository categoryReactiveRepository;
-
-    @Autowired
-    RecipeReactiveRepository recipeReactiveRepository;
-
     public RecipeBootstrap(CategoryRepository categoryRepository,
                            RecipeRepository recipeRepository, UnitOfMeasureRepository unitOfMeasureRepository) {
         this.categoryRepository = categoryRepository;
@@ -51,10 +38,6 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         loadUom();
         recipeRepository.saveAll(getRecipes());
         log.debug("Loading Bootstrap Data");
-        log.error("########");
-        log.error("Count unitOfMeasure: " + unitOfMeasureReactiveRepository.count().block().toString());
-        log.error("Count category: " + categoryReactiveRepository.count().block().toString());
-        log.error("Count recipe: " + recipeReactiveRepository.count().block().toString());
 
     }
 

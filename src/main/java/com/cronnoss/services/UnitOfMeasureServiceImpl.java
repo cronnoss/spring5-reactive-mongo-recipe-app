@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
 @Service
-public class UnitOfMeasureServiceImpl implements com.cronnoss.services.UnitOfMeasureService {
+public class UnitOfMeasureServiceImpl implements UnitOfMeasureService {
 
     private final UnitOfMeasureReactiveRepository unitOfMeasureReactiveRepository;
     private final UnitOfMeasureToUnitOfMeasureCommand unitOfMeasureToUnitOfMeasureCommand;
@@ -20,7 +20,7 @@ public class UnitOfMeasureServiceImpl implements com.cronnoss.services.UnitOfMea
     @Override
     public Flux<UnitOfMeasureCommand> listAllUoms() {
 
-       return unitOfMeasureReactiveRepository
+        return unitOfMeasureReactiveRepository
                 .findAll()
                 .map(unitOfMeasureToUnitOfMeasureCommand::convert);
 

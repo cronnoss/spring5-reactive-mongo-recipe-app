@@ -11,7 +11,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import reactor.core.publisher.Mono;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -47,7 +46,7 @@ public class ImageControllerTest {
         RecipeCommand command = new RecipeCommand();
         command.setId("1");
 
-        when(recipeService.findCommandById(anyString())).thenReturn(Mono.just(command));
+        when(recipeService.findCommandById(anyString())).thenReturn(command);
 
         //when
         mockMvc.perform(get("/recipe/1/image"))
@@ -64,7 +63,7 @@ public class ImageControllerTest {
                 new MockMultipartFile("imagefile", "testing.txt", "text/plain",
                         "com.cronnoss".getBytes());
 
-        when(imageService.saveImageFile(anyString(), any())).thenReturn(Mono.empty());
+        /*when(imageService.saveImageFile(anyString(), any())).thenReturn(Mono.empty());*/
 
         mockMvc.perform(multipart("/recipe/1/image").file(multipartFile))
                 .andExpect(status().is3xxRedirection())
