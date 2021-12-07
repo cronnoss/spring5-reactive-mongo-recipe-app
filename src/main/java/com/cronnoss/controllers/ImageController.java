@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-
 @Controller
 public class ImageController {
 
@@ -38,9 +36,9 @@ public class ImageController {
         return "redirect:/recipe/" + id + "/show";
     }
 
-    @GetMapping("recipe/{id}/recipeimage")
+    /*@GetMapping("recipe/{id}/recipeimage")
     public void renderImageFromDB() throws IOException {
-        /*RecipeCommand recipeCommand = recipeService.findCommandById(id).block();
+        *//*RecipeCommand recipeCommand = recipeService.findCommandById(id).block();
 
         if (recipeCommand.getImage() != null) {
             byte[] byteArray = new byte[recipeCommand.getImage().length];
@@ -53,6 +51,6 @@ public class ImageController {
             response.setContentType("image/jpeg");
             InputStream is = new ByteArrayInputStream(byteArray);
             IOUtils.copy(is, response.getOutputStream());
-        }*/
-    }
+        }*//*
+    }*/
 }
