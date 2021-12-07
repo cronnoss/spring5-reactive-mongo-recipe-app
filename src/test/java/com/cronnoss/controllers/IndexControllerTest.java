@@ -52,6 +52,7 @@ public class IndexControllerTest {
                 .andExpect(view().name("index"));
     }
 
+    @Disabled
     @Test
     public void getIndexPage() throws Exception {
 
