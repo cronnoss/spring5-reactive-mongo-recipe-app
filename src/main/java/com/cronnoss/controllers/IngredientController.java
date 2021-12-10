@@ -7,6 +7,7 @@ import com.cronnoss.services.IngredientService;
 import com.cronnoss.services.RecipeService;
 import com.cronnoss.services.UnitOfMeasureService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,7 +32,7 @@ public class IngredientController {
     }
 
     @InitBinder("ingredient")
-    public void initBinder(WebDataBinder webDataBinder) {
+    public void initDataBinder(WebDataBinder webDataBinder) {
         this.webDataBinder = webDataBinder;
     }
 
@@ -61,6 +62,7 @@ public class IngredientController {
 
         //need to return back parent id for hidden form property
         IngredientCommand ingredientCommand = new IngredientCommand();
+
         model.addAttribute("ingredient", ingredientCommand);
 
         //init uom
@@ -72,23 +74,23 @@ public class IngredientController {
     @GetMapping("recipe/{recipeId}/ingredient/{id}/update")
     public String updateRecipeIngredient(@PathVariable String recipeId,
                                          @PathVariable String id, Model model) {
-        model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(recipeId, id).block());
+        model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(recipeId, id));
+
         return "recipe/ingredient/ingredientform";
     }
 
     @PostMapping("recipe/{recipeId}/ingredient")
-    public String saveOrUpdate(@ModelAttribute("ingredient") IngredientCommand command) {
-
+    public String saveOrUpdate(@ModelAttribute("ingredient") IngredientCommand command, @PathVariable String recipeId) {
         webDataBinder.validate();
         BindingResult bindingResult = webDataBinder.getBindingResult();
 
         if (bindingResult.hasErrors()) {
-
-            bindingResult.getAllErrors().forEach(objectError -> {
-                log.debug(objectError.toString());
-            });
-
+            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
             return "recipe/ingredient/ingredientform";
+        }
+
+        if (Strings.isNotBlank(command.getRecipeId())) {
+            command.setRecipeId(recipeId);
         }
 
         IngredientCommand savedCommand = ingredientService.saveIngredientCommand(command).block();
@@ -108,8 +110,9 @@ public class IngredientController {
         return "redirect:/recipe/" + recipeId + "/ingredients";
     }
 
+    //this function will populate any response with uomList attribute. This avoid code replication
     @ModelAttribute("uomList")
-    public Flux<UnitOfMeasureCommand> populateUomList() {
+    public Flux<UnitOfMeasureCommand> populateUof() {
         return unitOfMeasureService.listAllUoms();
     }
 }

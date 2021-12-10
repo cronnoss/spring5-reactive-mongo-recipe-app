@@ -16,7 +16,7 @@ import org.thymeleaf.exceptions.TemplateInputException;
 @Controller
 public class RecipeController {
 
-    private static final String RECIPE_RECIPEFORM_URL = "recipe/recipeform";
+    private static final String RECIPE_RECIPE_FORM_URL = "recipe/recipeform";
     private final RecipeService recipeService;
 
     private WebDataBinder webDataBinder;
@@ -26,7 +26,7 @@ public class RecipeController {
     }
 
     @InitBinder
-    public void initBinder(WebDataBinder webDataBinder) {
+    public void initDataBinder(WebDataBinder webDataBinder) {
         this.webDataBinder = webDataBinder;
     }
 
@@ -47,8 +47,8 @@ public class RecipeController {
 
     @GetMapping("recipe/{id}/update")
     public String updateRecipe(@PathVariable String id, Model model) {
-        model.addAttribute("recipe", recipeService.findCommandById(id).block());
-        return RECIPE_RECIPEFORM_URL;
+        model.addAttribute("recipe", recipeService.findCommandById(id));
+        return RECIPE_RECIPE_FORM_URL;
     }
 
     @PostMapping("recipe")
@@ -59,11 +59,9 @@ public class RecipeController {
 
         if (bindingResult.hasErrors()) {
 
-            bindingResult.getAllErrors().forEach(objectError -> {
-                log.debug(objectError.toString());
-            });
+            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
 
-            return RECIPE_RECIPEFORM_URL;
+            return RECIPE_RECIPE_FORM_URL;
         }
 
         RecipeCommand savedCommand = recipeService.saveRecipeCommand(command).block();
