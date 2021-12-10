@@ -6,9 +6,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
 public class UnitOfMeasureToUnitOfMeasureCommandTest {
 
     public static final String DESCRIPTION = "description";
@@ -23,12 +20,12 @@ public class UnitOfMeasureToUnitOfMeasureCommandTest {
 
     @Test
     public void testNullObjectConvert() throws Exception {
-        assertNull(converter.convert(null));
+        Assertions.assertNull(converter.convert(null));
     }
 
     @Test
     public void testEmptyObj() throws Exception {
-        assertNotNull(converter.convert(new UnitOfMeasure()));
+        Assertions.assertNotNull(converter.convert(new UnitOfMeasure()));
     }
 
     @Test
